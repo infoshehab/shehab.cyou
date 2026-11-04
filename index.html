@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MD Shehab Uddin — Designer</title>
+<meta name="description" content="MD Shehab Uddin — Designer. Get in touch on Facebook, WhatsApp, Instagram or Gmail.">
+<meta name="theme-color" content="#000">
+<meta property="og:title" content="MD Shehab Uddin — Designer">
+<meta property="og:type" content="website">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--bg:#000;--fg:#f5efe8;--muted:#9b9490;--neon:#39ff14;--neon2:#00ff5a;--neon3:#00d94a;
+        --border:rgba(210,170,120,.25)}
+  html,body{height:100%;background:var(--bg);color:var(--fg);overflow:hidden;
+    font-family:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif}
+
+  /* ================= INTRO ================= */
+  #intro{position:fixed;inset:0;z-index:20;background:var(--bg);display:flex;align-items:center;
+    justify-content:center;padding:0 5vw;transition:opacity .9s ease,visibility .9s ease}
+  #intro.done{opacity:0;visibility:hidden}
+
+  .stage{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;margin-top:4vh}
+
+  /* name — letters rise from behind a mask */
+  #introName{display:flex;flex-wrap:wrap;justify-content:center;font-weight:700;text-transform:uppercase;
+    font-size:clamp(1.6rem,6.4vw,3.4rem);letter-spacing:.06em;line-height:1.2}
+  .lt{display:inline-block;overflow:hidden;padding:.12em 0;vertical-align:top}
+  .lt i{display:inline-block;font-style:normal;transform:translateY(115%)}
+  .lt.sp{width:.35em}
+  #intro.name .lt i{animation:rise .75s cubic-bezier(.2,.9,.2,1) forwards}
+
+  /* lighting — প্রথম ভার্সনের মতো: নামের নিচে সরু সাদা রেখা + নরম আলো */
+  .bar{position:relative;display:block;width:100%;height:2px;opacity:0;transform:scaleX(.2);
+    animation:glowIn 1.2s ease-out .3s forwards}
+  .bar::before,.bar::after{content:"";position:absolute;left:50%;transform:translateX(-50%);pointer-events:none}
+  .bar::before{top:0;width:70%;height:2px;border-radius:2px;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.9),transparent)}
+  .bar::after{top:-2px;width:85%;height:46px;filter:blur(10px);
+    background:radial-gradient(ellipse at 50% 0,rgba(255,255,255,.45),rgba(255,255,255,.1) 45%,transparent 72%)}
+
+  @keyframes glowIn{to{opacity:1;transform:scaleX(1)}}
+  @keyframes rise{to{transform:none}}
+
+  /* ================= MAIN PAGE ================= */
+  main{position:relative;height:100%;overflow:hidden}
+  .photo{position:absolute;right:0;bottom:0;height:92%;max-width:70%;object-fit:contain;
+    object-position:right bottom;opacity:0;transform:scale(1.05);
+    transition:opacity 1.4s ease,transform 1.8s ease;
+    -webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 8%,#000 70%,transparent 100%),
+      linear-gradient(to right,transparent 0,#000 12%,#000 88%,transparent 100%);
+    -webkit-mask-composite:source-in;
+    mask-image:linear-gradient(to bottom,transparent 0,#000 8%,#000 70%,transparent 100%),
+      linear-gradient(to right,transparent 0,#000 12%,#000 88%,transparent 100%);
+    mask-composite:intersect}
+  .show .photo{opacity:1;transform:none}
+
+  .info{position:absolute;left:0;bottom:0;z-index:2;padding:0 clamp(20px,5vw,72px);
+    padding-bottom:calc(clamp(28px,6vh,64px) + env(safe-area-inset-bottom,0px))}
+  .name{font-weight:700;font-size:clamp(1.5rem,8.6vw,6rem);line-height:1;letter-spacing:.01em;white-space:nowrap}
+  .name .line{display:block;padding-bottom:.08em}
+  .name .w{display:inline-block;opacity:0}
+  .show .name .w{animation:wave 1s cubic-bezier(.3,.7,.3,1) forwards;
+    animation-delay:calc(.25s + var(--i) * .06s)}
+  @keyframes wave{
+    0%{opacity:0;transform:translateY(55%)}
+    45%{opacity:1;transform:translateY(-14%)}
+    75%{transform:translateY(5%)}
+    100%{opacity:1;transform:none}}
+
+  .role{margin-top:clamp(6px,1.2vh,14px);font-size:clamp(1rem,2.2vw,1.6rem);font-weight:500;
+    color:#ffd60a;letter-spacing:.04em;opacity:0;transform:translateY(12px);
+    transition:opacity .8s ease .9s,transform .8s ease .9s}
+  .show .role{opacity:1;transform:none}
+
+  /* social pills — icon + label, like the reference */
+  .socials{margin-top:clamp(18px,4vh,36px);display:flex;flex-wrap:wrap;gap:12px;max-width:min(92vw,560px)}
+  .socials a{display:inline-flex;align-items:center;gap:12px;padding:13px 24px 13px 20px;
+    border:1px solid var(--border);border-radius:999px;background:#0f0d0c;color:var(--fg);
+    text-decoration:none;font-size:1.05rem;font-weight:500;opacity:0;transform:translateY(14px);
+    transition:opacity .6s ease,transform .3s ease,border-color .3s ease,background .3s ease}
+  .socials svg{width:24px;height:24px;flex:none}
+  .show .socials a{opacity:1;transform:none}
+  .show .socials a:nth-child(1){transition-delay:1.1s,0s,0s,0s}
+  .show .socials a:nth-child(2){transition-delay:1.2s,0s,0s,0s}
+  .show .socials a:nth-child(3){transition-delay:1.3s,0s,0s,0s}
+  .show .socials a:nth-child(4){transition-delay:1.4s,0s,0s,0s}
+  .socials a:hover,.socials a:focus-visible{transform:translateY(-4px);border-color:rgba(245,239,232,.6);
+    background:#171412;outline:none;transition-delay:0s}
+
+  @media (max-width:700px){
+    .photo{height:62%;max-width:100%;right:50%;bottom:auto;top:0;object-position:center bottom;
+      transform:translateX(50%) scale(1.05)}
+    .show .photo{transform:translateX(50%)}
+  }
+  @media (prefers-reduced-motion:reduce){
+    #intro .bar,#intro.name .lt i,.show .name .w{animation-duration:.01s;animation-delay:0s}
+    #intro,.photo,.role,.socials a{transition-duration:.01s;transition-delay:0s!important}
+  }
+</style>
+</head>
+<body>
+
+<div id="intro">
+  <div class="stage">
+    <h1 id="introName" aria-label="MD Shehab Uddin"></h1>
+    <span class="bar" id="bar"></span>
+  </div>
+</div>
+
+<main id="main">
+  <!-- ছবির ফাইলের নাম photo.jpg, index.html এর পাশেই রাখো -->
+  <img class="photo" src="photo.jpg" alt="MD Shehab Uddin" onerror="this.style.display='none'">
+
+  <div class="info">
+    <h2 class="name" aria-label="MD Shehab Uddin">
+      <span class="line" id="mainName"></span>
+    </h2>
+    <p class="role">Designer</p>
+
+    <nav class="socials" aria-label="Social links">
+      <a href="https://www.facebook.com/01Shehab" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="currentColor"/>
+          <path fill="#0f0d0c" d="M13.2 22v-8h2.7l.5-3.2h-3.2V8.8c0-.9.4-1.6 1.7-1.6h1.6V4.4c-.3 0-1.3-.2-2.4-.2-2.5 0-4.1 1.5-4.1 4.2v2.4H7.3V14H10v8z"/></svg>
+        Facebook
+      </a>
+      <a href="https://wa.me/+8801796886918" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M3.5 20.5l1.3-4.7A8.7 8.7 0 1 1 8.3 19.3z"/>
+          <path fill="currentColor" d="M9.2 7.8c.3-.4.8-.3 1 .1l.8 1.8c.1.3 0 .6-.2.8l-.6.6c.7 1.4 1.8 2.4 3.2 3.1l.7-.7c.2-.2.5-.3.8-.1l1.7.8c.4.2.5.6.2 1-.6 1-1.5 1.4-2.6 1.2-3.1-.8-5.3-3-6-6.1-.1-1 .3-1.8 1-2.5z"/></svg>
+        WhatsApp
+      </a>
+      <a href="https://www.instagram.com/01shehabuddin" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5.5" fill="none" stroke="currentColor" stroke-width="2"/>
+          <circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/>
+          <circle cx="17.2" cy="6.8" r="1.2" fill="currentColor"/></svg>
+        Instagram
+      </a>
+      <a href="mailto:contact@shehab.cyou">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round" d="M4.5 19V6.5l7.5 6 7.5-6V19"/></svg>
+        Gmail
+      </a>
+    </nav>
+  </div>
+</main>
+
+<script>
+  const text = "MD Shehab Uddin";
+  const intro = document.getElementById("intro");
+  const main  = document.getElementById("main");
+  const nameEl = document.getElementById("introName");
+
+  // নামের প্রতিটা অক্ষর আলাদা মাস্কের ভেতরে
+  [...text].forEach((c, i) => {
+    const w = document.createElement("span");
+    w.className = c === " " ? "lt sp" : "lt";
+    const s = document.createElement("i");
+    s.innerHTML = c === " " ? "&nbsp;" : c;
+    s.style.animationDelay = (i * 0.045) + "s";
+    w.appendChild(s);
+    nameEl.appendChild(w);
+  });
+
+  // নিচের নাম: বাম দিক (MD) থেকে ঢেউয়ের মতো একে একে আসে
+  const mainName = document.getElementById("mainName");
+  [...text].forEach((c, i) => {
+    const w = document.createElement("span");
+    w.className = "w";
+    w.style.setProperty("--i", i);
+    w.innerHTML = c === " " ? "&nbsp;" : c;
+    mainName.appendChild(w);
+  });
+
+  /* ক্রম: ১) আলো ছড়ায় → ২) আলো শেষ হলে নাম ওঠে → ৩) নাম ফেড আউট → ৪) ছবি + নাম + আইকন */
+  let started = false;
+  function showName() {
+    if (started) return;
+    started = true;
+    setTimeout(() => {
+      intro.classList.add("name");
+      const nameTime = text.length * 45 + 750 + 900;
+      setTimeout(() => intro.classList.add("done"), nameTime);
+      setTimeout(() => main.classList.add("show"), nameTime + 500);
+    }, 350);
+  }
+  document.getElementById("bar").addEventListener("animationend", showName);
+  setTimeout(showName, 2600); // fallback
+
+  /* ================= ছবিতে টাচ/ক্লিক করলে পানির ঢেউ (WebGL) ================= */
+  (function waterRipple() {
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const fallbackImg = document.querySelector("img.photo");
+    const img = new Image();
+    img.onload = start;
+    img.src = "photo.jpg";
+
+    function start() {
+      const canvas = document.createElement("canvas");
+      canvas.className = "photo";
+      canvas.style.touchAction = "none";
+      canvas.setAttribute("role", "img");
+      canvas.setAttribute("aria-label", "MD Shehab Uddin");
+      const gl = canvas.getContext("webgl", { alpha: false, antialias: false });
+      if (!gl) return;                                   // WebGL না থাকলে সাধারণ ছবিই থাকবে
+
+      const vs = "attribute vec2 p;varying vec2 uv;void main(){uv=vec2(p.x*.5+.5,.5-p.y*.5);gl_Position=vec4(p,0.,1.);}";
+      const fs = `precision mediump float;
+        varying vec2 uv; uniform sampler2D tex; uniform vec4 rip[8]; uniform float aspect;
+        void main(){
+          vec2 disp=vec2(0.); float shine=0.;
+          for(int i=0;i<8;i++){
+            if(rip[i].w>0.){
+              float t=rip[i].z;
+              vec2 d=(uv-rip[i].xy)*vec2(aspect,1.);
+              float r=length(d);
+              float w=r-t*.5;
+              float wave=sin(w*48.)*exp(-w*w*55.)*exp(-t*2.0)*rip[i].w;
+              disp+=d/(r+.0001)*wave*.0035;
+              shine+=wave;
+            }
+          }
+          vec2 q=uv+disp/vec2(aspect,1.);
+          vec3 c=texture2D(tex,q).rgb;
+          c+=shine*.015;
+          gl_FragColor=vec4(c,1.);
+        }`;
+      function sh(type, src) { const o = gl.createShader(type); gl.shaderSource(o, src); gl.compileShader(o); return o; }
+      const prog = gl.createProgram();
+      gl.attachShader(prog, sh(gl.VERTEX_SHADER, vs));
+      gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, fs));
+      gl.linkProgram(prog);
+      if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) return;
+      gl.useProgram(prog);
+
+      const buf = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+      const loc = gl.getAttribLocation(prog, "p");
+      gl.enableVertexAttribArray(loc);
+      gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+
+      const tex = gl.createTexture();
+      gl.bindTexture(gl.TEXTURE_2D, tex);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, img);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+
+      const uRip = gl.getUniformLocation(prog, "rip");
+      const uAspect = gl.getUniformLocation(prog, "aspect");
+      gl.uniform1f(uAspect, img.naturalWidth / img.naturalHeight);
+
+      const ripples = [];            // {x,y,t0}
+      const MAX = 8, LIFE = 2.4;
+      let running = false;
+
+      function layout() {
+        const W = main.clientWidth, H = main.clientHeight;
+        const mobile = matchMedia("(max-width:700px)").matches;
+        const maxW = mobile ? W : W * 0.7, maxH = mobile ? H * 0.62 : H * 0.92;
+        const k = Math.min(maxW / img.naturalWidth, maxH / img.naturalHeight);
+        const cw = Math.round(img.naturalWidth * k), ch = Math.round(img.naturalHeight * k);
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.style.width = cw + "px"; canvas.style.height = ch + "px";
+        canvas.width = Math.round(cw * dpr); canvas.height = Math.round(ch * dpr);
+        gl.viewport(0, 0, canvas.width, canvas.height);
+        draw();
+      }
+
+      function draw() {
+        const now = performance.now() / 1000;
+        while (ripples.length && now - ripples[0].t0 > LIFE) ripples.shift();
+        const data = new Float32Array(MAX * 4);
+        ripples.forEach((r, i) => {
+          const age = now - r.t0;
+          data.set([r.x, r.y, age, Math.max(0.0001, r.k * (1 - age / LIFE))], i * 4);
+        });
+        gl.uniform4fv(uRip, data);
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      }
+
+      function loop() {
+        draw();
+        if (ripples.length) requestAnimationFrame(loop); else running = false;
+      }
+
+      function addRipple(e, k) {
+        const r = canvas.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+        if (x < 0 || x > 1 || y < 0 || y > 1) return;
+        if (ripples.length >= MAX) ripples.shift();
+        ripples.push({ x, y, k, t0: performance.now() / 1000 });
+        if (!running) { running = true; requestAnimationFrame(loop); }
+      }
+
+      let down = false, last = 0;
+      canvas.addEventListener("pointerdown", e => { down = true; addRipple(e, 1); });
+      canvas.addEventListener("pointermove", e => {
+        if (!down) return;
+        const n = performance.now();
+        if (n - last > 160) { last = n; addRipple(e, 0.4); }
+      });
+      addEventListener("pointerup", () => down = false);
+      addEventListener("pointercancel", () => down = false);
+      addEventListener("resize", layout);
+
+      fallbackImg.replaceWith(canvas);
+      layout();
+    }
+  })();
+</script>
+</body>
+</html>
