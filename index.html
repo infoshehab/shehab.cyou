@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MD Shehab Uddin — Designer</title>
+<meta name="description" content="MD Shehab Uddin — Designer. Get in touch on Facebook, WhatsApp or Gmail.">
+<meta name="theme-color" content="#000">
+<meta property="og:title" content="MD Shehab Uddin — Designer">
+<meta property="og:type" content="website">
+<style>
+  @font-face{font-family:"Handlee";src:url("Handlee-Regular.ttf") format("truetype");font-weight:normal;font-style:normal;font-display:swap}
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--bg:#000;--fg:#f5efe8;--muted:#9b9490;--neon:#39ff14;--neon2:#00ff5a;--neon3:#00d94a;
+        --border:rgba(210,170,120,.25)}
+  html,body{height:100%;background:var(--bg);color:var(--fg);overflow:hidden;
+    font-family:"Handlee","Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;font-synthesis:none}
+
+  /* ================= INTRO ================= */
+  #intro{position:fixed;inset:0;z-index:20;background:var(--bg);display:flex;align-items:center;
+    justify-content:center;padding:0 5vw;transition:opacity .9s ease,visibility .9s ease}
+  #intro.done{opacity:0;visibility:hidden}
+
+  .stage{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;margin-top:4vh}
+
+  /* name — letters rise from behind a mask */
+  #introName{display:flex;flex-wrap:wrap;justify-content:center;font-weight:700;text-transform:uppercase;
+    font-size:clamp(1.6rem,6.4vw,3.4rem);letter-spacing:.06em;line-height:1.2}
+  .lt{display:inline-block;overflow:hidden;padding:.12em 0;vertical-align:top}
+  .lt i{display:inline-block;font-style:normal;transform:translateY(115%)}
+  .lt.sp{width:.35em}
+  #intro.name .lt i{animation:rise .75s cubic-bezier(.2,.9,.2,1) forwards}
+
+  /* lighting — প্রথম ভার্সনের মতো: নামের নিচে সরু সাদা রেখা + নরম আলো */
+  .bar{position:relative;display:block;width:100%;height:2px;opacity:0;transform:scaleX(.2);
+    animation:glowIn 1.2s ease-out .3s forwards}
+  .bar::before,.bar::after{content:"";position:absolute;left:50%;transform:translateX(-50%);pointer-events:none}
+  .bar::before{top:0;width:70%;height:2px;border-radius:2px;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.9),transparent)}
+  .bar::after{top:-2px;width:85%;height:46px;filter:blur(10px);
+    background:radial-gradient(ellipse at 50% 0,rgba(255,255,255,.45),rgba(255,255,255,.1) 45%,transparent 72%)}
+
+  @keyframes glowIn{to{opacity:1;transform:scaleX(1)}}
+  @keyframes rise{to{transform:none}}
+
+  /* ================= MAIN PAGE ================= */
+  main{position:relative;height:100%;overflow:hidden}
+  .photo{position:absolute;right:0;bottom:0;height:92%;max-width:70%;object-fit:contain;
+    object-position:right bottom;opacity:0;transform:scale(1.05);
+    transition:opacity 1.4s ease,transform 1.8s ease;
+    -webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 8%,#000 70%,transparent 100%),
+      linear-gradient(to right,transparent 0,#000 12%,#000 88%,transparent 100%);
+    -webkit-mask-composite:source-in;
+    mask-image:linear-gradient(to bottom,transparent 0,#000 8%,#000 70%,transparent 100%),
+      linear-gradient(to right,transparent 0,#000 12%,#000 88%,transparent 100%);
+    mask-composite:intersect}
+  .s-photo .photo{opacity:1;transform:none}
+
+  .info{position:absolute;left:0;bottom:0;z-index:2;padding:0 clamp(20px,5vw,72px);
+    padding-bottom:calc(clamp(28px,6vh,64px) + 24px + env(safe-area-inset-bottom,0px))}
+  .name{font-weight:700;font-size:clamp(1.5rem,8.6vw,6rem);line-height:1;letter-spacing:.01em;white-space:nowrap}
+  .name .line{display:block;padding-bottom:.08em}
+  .name .w{display:inline-block;opacity:0}
+  .s-name .name .w{animation:wave 1s cubic-bezier(.3,.7,.3,1) forwards;
+    animation-delay:calc(var(--i) * .06s)}
+  @keyframes wave{
+    0%{opacity:0;transform:translateY(55%)}
+    45%{opacity:1;transform:translateY(-14%)}
+    75%{transform:translateY(5%)}
+    100%{opacity:1;transform:none}}
+
+  .role{margin-top:clamp(6px,1.2vh,14px);font-size:clamp(1rem,2.2vw,1.6rem);font-weight:500;
+    color:#ffd60a;letter-spacing:.04em;opacity:0;transform:translateY(12px);
+    transition:opacity .8s ease,transform .8s ease}
+  .s-role .role{opacity:1;transform:none}
+
+  /* social pills — icon + label, like the reference */
+  .socials{margin-top:clamp(18px,4vh,36px);display:flex;flex-wrap:wrap;gap:12px;max-width:min(92vw,560px)}
+  .socials a{display:inline-flex;align-items:center;gap:12px;padding:13px 24px 13px 20px;
+    border:1px solid var(--border);border-radius:999px;background:#0f0d0c;color:var(--fg);
+    text-decoration:none;font-size:1.05rem;font-weight:500;opacity:0;transform:translateY(14px);
+    transition:opacity .6s ease,transform .3s ease,border-color .3s ease,background .3s ease}
+  .socials svg{width:24px;height:24px;flex:none}
+  .s-soc1 .socials a:nth-child(1),.s-soc2 .socials a:nth-child(2),.s-soc3 .socials a:nth-child(3){opacity:1;transform:none}
+        .socials a:hover,.socials a:focus-visible{transform:translateY(-4px);border-color:rgba(245,239,232,.6);
+    background:#171412;outline:none;transition-delay:0s}
+
+  /* ক্রেডিট — একদম নিচে বাম দিকে */
+  .credit{position:absolute;left:clamp(20px,5vw,72px);z-index:2;text-align:left;
+    bottom:calc(12px + env(safe-area-inset-bottom,0px));font-size:.72rem;letter-spacing:.04em;
+    color:var(--muted);opacity:0;transform:translateX(-16px);
+    transition:opacity .8s ease,transform .8s ease}
+  .credit a{color:inherit;text-decoration:none}
+  .credit b{font-weight:700;color:#ffd60a;transition:text-shadow .3s ease}
+  .credit a:hover b,.credit a:focus-visible b{text-shadow:0 0 10px rgba(255,214,10,.6)}
+  .credit a:focus-visible{outline:none}
+  .s-credit .credit{opacity:1;transform:none}
+
+  @media (max-width:700px){
+    .photo{height:62%;max-width:100%;right:50%;bottom:auto;top:0;object-position:center bottom;
+      transform:translateX(50%) scale(1.05)}
+    .s-photo .photo{transform:translateX(50%)}
+  }
+  @media (prefers-reduced-motion:reduce){
+    #intro .bar,#intro.name .lt i,.s-name .name .w{animation-duration:.01s;animation-delay:0s}
+    #intro,.photo,.role,.credit,.socials a{transition-duration:.01s;transition-delay:0s!important}
+  }
+
+  /* ================= কার্সর + ডিজাইন-টুল অ্যানিমেশন (ভিডিও থেকে) ================= */
+  :root{--blue:#2f7bff}
+  #cur{position:fixed;left:0;top:0;z-index:60;pointer-events:none;display:none;width:22px;will-change:transform;opacity:0}
+  #cur.on{opacity:1}
+  #cur svg{display:block;width:22px;height:22px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.6))}
+  #cur span{position:absolute;left:16px;top:20px;background:#ffd60a;color:#000;font-size:11px;font-weight:700;
+    padding:2px 8px;border-radius:999px;white-space:nowrap}
+  @media (hover:hover) and (pointer:fine){
+    body.fine,body.fine a,body.fine canvas{cursor:none}
+    body.fine #cur{display:block}
+  }
+  .tp{position:fixed;width:14px;height:14px;pointer-events:none;z-index:55;animation:tp 1.1s ease-out forwards}
+  .tp svg{width:100%;height:100%;display:block}
+  @keyframes tp{
+    0%{transform:translate(-50%,-50%) scale(.4) rotate(0);opacity:1}
+    100%{transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(1.1) rotate(var(--r));opacity:0}}
+
+  /* নীল সিলেকশন বক্স (হোভারে + শুরুর সিলেক্ট-অ্যানিমেশনে) */
+  #sel{position:fixed;z-index:58;pointer-events:none;border:1.5px solid var(--blue);opacity:0;
+    transition:left .22s,top .22s,width .22s,height .22s,opacity .15s}
+  #sel.on{opacity:1}
+  #sel i,.sb i{position:absolute;width:8px;height:8px;background:#fff;border:1.5px solid var(--blue)}
+  #sel .tl,.sb .tl{left:-5px;top:-5px}#sel .tr,.sb .tr{right:-5px;top:-5px}
+  #sel .bl,.sb .bl{left:-5px;bottom:-5px}#sel .br,.sb .br{right:-5px;bottom:-5px}
+  #sel b{position:absolute;left:50%;top:calc(100% + 8px);translate:-50% 0;background:var(--blue);color:#fff;
+    font-size:11px;font-weight:500;padding:2px 7px;border-radius:3px;white-space:nowrap}
+
+  /* নাম আসার আগে: কার্সর টেনে লেখা/ছবি সিলেক্ট করে */
+  #wire{position:fixed;inset:0;z-index:30;pointer-events:none;transition:opacity .8s}
+  #wire.out{opacity:0}
+  .sb{position:absolute;border:1.5px solid var(--blue);background:rgba(47,123,255,.22)}
+  .tag{position:absolute;left:-1.5px;bottom:calc(100% + 6px);background:var(--blue);color:#fff;font-size:11px;
+    padding:2px 7px;border-radius:3px;white-space:nowrap}
+  .tag.in{bottom:auto;top:6px;left:6px}
+  .fc{position:absolute;left:0;top:0;width:20px;will-change:transform}
+  .fc svg{display:block;width:20px;height:20px}
+  .fc span{position:absolute;left:14px;top:18px;font-size:11px;color:#fff;padding:2px 8px;border-radius:999px;white-space:nowrap}
+  /* শেষে কার্সর দিয়ে লেখা নাম */
+  .fin{position:absolute;left:0;top:0;white-space:nowrap;font-weight:700;text-transform:uppercase;letter-spacing:.06em;
+    font-size:clamp(1.5rem,5.5vw,3.4rem);line-height:1.2;color:var(--fg);text-shadow:0 2px 14px rgba(0,0,0,.9);
+    clip-path:inset(0 100% 0 0);pointer-events:none}
+  @media (prefers-reduced-motion:reduce){.tp{animation:none}}
+</style>
+</head>
+<body>
+
+<div id="intro">
+  <div class="stage">
+    <h1 id="introName" aria-label="MD Shehab Uddin"></h1>
+    <span class="bar" id="bar"></span>
+  </div>
+</div>
+
+<main id="main">
+  <!-- ছবির ফাইলের নাম photo.jpg, index.html এর পাশেই রাখো -->
+  <img class="photo" src="photo.jpg" alt="MD Shehab Uddin" onerror="this.style.display='none'">
+
+  <div class="info">
+    <h2 class="name" aria-label="MD Shehab Uddin">
+      <span class="line" id="mainName"></span>
+    </h2>
+    <p class="role">Designer</p>
+
+    <nav class="socials" aria-label="Social links">
+      <a href="https://www.facebook.com/01Shehab" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="currentColor"/>
+          <path fill="#0f0d0c" d="M13.2 22v-8h2.7l.5-3.2h-3.2V8.8c0-.9.4-1.6 1.7-1.6h1.6V4.4c-.3 0-1.3-.2-2.4-.2-2.5 0-4.1 1.5-4.1 4.2v2.4H7.3V14H10v8z"/></svg>
+        Facebook
+      </a>
+      <a href="https://wa.me/+8801796886918" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M3.5 20.5l1.3-4.7A8.7 8.7 0 1 1 8.3 19.3z"/>
+          <path fill="currentColor" d="M9.2 7.8c.3-.4.8-.3 1 .1l.8 1.8c.1.3 0 .6-.2.8l-.6.6c.7 1.4 1.8 2.4 3.2 3.1l.7-.7c.2-.2.5-.3.8-.1l1.7.8c.4.2.5.6.2 1-.6 1-1.5 1.4-2.6 1.2-3.1-.8-5.3-3-6-6.1-.1-1 .3-1.8 1-2.5z"/></svg>
+        WhatsApp
+      </a>
+      <a href="mailto:contact@shehab.cyou">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round" d="M4.5 19V6.5l7.5 6 7.5-6V19"/></svg>
+        Gmail
+      </a>
+    </nav>
+  </div>
+
+  <p class="credit">Designed &amp; Developed by <a href="https://www.facebook.com/01Shehab" target="_blank" rel="noopener"><b>SHEHAB</b></a></p>
+</main>
+
+<div id="sel" aria-hidden="true"><i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i><b></b></div>
+<div id="cur" aria-hidden="true">
+  <svg viewBox="0 0 24 24"><path d="M3 2l7 19 3-8 8-3z" fill="#fff" stroke="#ffd60a" stroke-width="1.6" stroke-linejoin="round"/></svg>
+  <span>Shehab</span>
+</div>
+<div id="wire" aria-hidden="true"></div>
+
+<script>
+  const text = "MD Shehab Uddin";
+  const intro = document.getElementById("intro");
+  const main  = document.getElementById("main");
+  const nameEl = document.getElementById("introName");
+
+  // নামের প্রতিটা অক্ষর আলাদা মাস্কের ভেতরে
+  [...text].forEach((c, i) => {
+    const w = document.createElement("span");
+    w.className = c === " " ? "lt sp" : "lt";
+    const s = document.createElement("i");
+    s.innerHTML = c === " " ? "&nbsp;" : c;
+    s.style.animationDelay = (i * 0.045) + "s";
+    w.appendChild(s);
+    nameEl.appendChild(w);
+  });
+
+  // নিচের নাম: বাম দিক (MD) থেকে ঢেউয়ের মতো একে একে আসে
+  const mainName = document.getElementById("mainName");
+  [...text].forEach((c, i) => {
+    const w = document.createElement("span");
+    w.className = "w";
+    w.style.setProperty("--i", i);
+    w.innerHTML = c === " " ? "&nbsp;" : c;
+    mainName.appendChild(w);
+  });
+
+  /* ক্রম: ১) আলো ছড়ায় → ২) আলো শেষ হলে নাম ওঠে → ৩) নাম ফেড আউট → ৪) ছবি + নাম + আইকন */
+  let started = false;
+  function showName() {
+    if (started) return;
+    started = true;
+    setTimeout(async () => {
+      try { await window.introSelect(); } catch (e) {}   // আগে কার্সর টেনে নাম সিলেক্ট, তারপর অক্ষর ওঠে
+      intro.classList.add("name");
+      const nameTime = text.length * 45 + 750 + 900;
+      setTimeout(() => intro.classList.add("done"), nameTime);
+      setTimeout(() => window.startReveal(), nameTime + 500);
+    }, 350);
+  }
+  document.getElementById("bar").addEventListener("animationend", showName);
+  setTimeout(showName, 2600); // fallback
+
+  /* ================= ছবিতে টাচ/ক্লিক করলে পানির ঢেউ (WebGL) ================= */
+  (function waterRipple() {
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const fallbackImg = document.querySelector("img.photo");
+    const img = new Image();
+    img.onload = start;
+    img.src = "photo.jpg";
+
+    function start() {
+      const canvas = document.createElement("canvas");
+      canvas.className = "photo";
+      canvas.style.touchAction = "none";
+      canvas.setAttribute("role", "img");
+      canvas.setAttribute("aria-label", "MD Shehab Uddin");
+      const gl = canvas.getContext("webgl", { alpha: false, antialias: false });
+      if (!gl) return;                                   // WebGL না থাকলে সাধারণ ছবিই থাকবে
+
+      const vs = "attribute vec2 p;varying vec2 uv;void main(){uv=vec2(p.x*.5+.5,.5-p.y*.5);gl_Position=vec4(p,0.,1.);}";
+      const fs = `precision mediump float;
+        varying vec2 uv; uniform sampler2D tex; uniform vec4 rip[8]; uniform float aspect;
+        void main(){
+          vec2 disp=vec2(0.); float shine=0.;
+          for(int i=0;i<8;i++){
+            if(rip[i].w>0.){
+              float t=rip[i].z;
+              vec2 d=(uv-rip[i].xy)*vec2(aspect,1.);
+              float r=length(d);
+              float w=r-t*.5;
+              float wave=sin(w*48.)*exp(-w*w*55.)*exp(-t*2.0)*rip[i].w;
+              disp+=d/(r+.0001)*wave*.0035;
+              shine+=wave;
+            }
+          }
+          vec2 q=uv+disp/vec2(aspect,1.);
+          vec3 c=texture2D(tex,q).rgb;
+          c+=shine*.015;
+          gl_FragColor=vec4(c,1.);
+        }`;
+      function sh(type, src) { const o = gl.createShader(type); gl.shaderSource(o, src); gl.compileShader(o); return o; }
+      const prog = gl.createProgram();
+      gl.attachShader(prog, sh(gl.VERTEX_SHADER, vs));
+      gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, fs));
+      gl.linkProgram(prog);
+      if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) return;
+      gl.useProgram(prog);
+
+      const buf = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+      const loc = gl.getAttribLocation(prog, "p");
+      gl.enableVertexAttribArray(loc);
+      gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+
+      const tex = gl.createTexture();
+      gl.bindTexture(gl.TEXTURE_2D, tex);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, img);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+
+      const uRip = gl.getUniformLocation(prog, "rip");
+      const uAspect = gl.getUniformLocation(prog, "aspect");
+      gl.uniform1f(uAspect, img.naturalWidth / img.naturalHeight);
+
+      const ripples = [];            // {x,y,t0}
+      const MAX = 8, LIFE = 2.4;
+      let running = false;
+
+      function layout() {
+        const W = main.clientWidth, H = main.clientHeight;
+        const mobile = matchMedia("(max-width:700px)").matches;
+        const maxW = mobile ? W : W * 0.7, maxH = mobile ? H * 0.62 : H * 0.92;
+        const k = Math.min(maxW / img.naturalWidth, maxH / img.naturalHeight);
+        const cw = Math.round(img.naturalWidth * k), ch = Math.round(img.naturalHeight * k);
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.style.width = cw + "px"; canvas.style.height = ch + "px";
+        canvas.width = Math.round(cw * dpr); canvas.height = Math.round(ch * dpr);
+        gl.viewport(0, 0, canvas.width, canvas.height);
+        draw();
+      }
+
+      function draw() {
+        const now = performance.now() / 1000;
+        while (ripples.length && now - ripples[0].t0 > LIFE) ripples.shift();
+        const data = new Float32Array(MAX * 4);
+        ripples.forEach((r, i) => {
+          const age = now - r.t0;
+          data.set([r.x, r.y, age, Math.max(0.0001, r.k * (1 - age / LIFE))], i * 4);
+        });
+        gl.uniform4fv(uRip, data);
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      }
+
+      function loop() {
+        draw();
+        if (ripples.length) requestAnimationFrame(loop); else running = false;
+      }
+
+      function addRipple(e, k) {
+        const r = canvas.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+        if (x < 0 || x > 1 || y < 0 || y > 1) return;
+        if (ripples.length >= MAX) ripples.shift();
+        ripples.push({ x, y, k, t0: performance.now() / 1000 });
+        if (!running) { running = true; requestAnimationFrame(loop); }
+      }
+
+      let down = false, last = 0;
+      canvas.addEventListener("pointerdown", e => { down = true; addRipple(e, 1); });
+      canvas.addEventListener("pointermove", e => {
+        if (!down) return;
+        const n = performance.now();
+        if (n - last > 160) { last = n; addRipple(e, 0.4); }
+      });
+      addEventListener("pointerup", () => down = false);
+      addEventListener("pointercancel", () => down = false);
+      addEventListener("resize", layout);
+
+      fallbackImg.replaceWith(canvas);
+      layout();
+    }
+  })();
+
+  /* ================= কার্সর ট্রেইল + হোভার বক্স + শুরুর সিলেক্ট-অ্যানিমেশন ================= */
+  (function cursorFx() {
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const ARROW = '<svg viewBox="0 0 24 24"><path d="M3 2l7 19 3-8 8-3z" fill="currentColor"/></svg>';
+    const HEART = '<svg viewBox="0 0 24 24"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 018-2.8A4.5 4.5 0 0120 10c0 5.8-8 11-8 11z" fill="currentColor"/></svg>';
+    const COLORS = ["#ff6b8a", "#ffd166", "#6be3ff", "#9b8cff", "#7dff9e"];
+    const fine = matchMedia("(hover:hover) and (pointer:fine)").matches;
+    if (fine) document.body.classList.add("fine");
+
+    // রঙিন তীর/হার্টের ট্রেইল
+    let lx = null, ly = null;
+    function spawn(x, y) {
+      const el = document.createElement("i");
+      el.className = "tp";
+      el.innerHTML = Math.random() < .55 ? ARROW : HEART;
+      el.style.color = COLORS[(Math.random() * COLORS.length) | 0];
+      el.style.left = x + "px"; el.style.top = y + "px";
+      el.style.setProperty("--dx", (Math.random() * 50 - 25).toFixed(0) + "px");
+      el.style.setProperty("--dy", (20 + Math.random() * 50).toFixed(0) + "px");
+      el.style.setProperty("--r", (Math.random() * 120 - 60).toFixed(0) + "deg");
+      el.addEventListener("animationend", () => el.remove());
+      document.body.appendChild(el);
+    }
+    function trail(x, y) {
+      if (lx === null) { lx = x; ly = y; return; }
+      if (Math.hypot(x - lx, y - ly) > 26) { if (!reduce) spawn(x, y); lx = x; ly = y; }
+    }
+    const cur = document.getElementById("cur");
+    addEventListener("pointermove", e => {
+      if (e.pointerType === "touch") return;
+      cur.style.transform = "translate(" + e.clientX + "px," + e.clientY + "px)";
+      cur.classList.add("on");
+      trail(e.clientX, e.clientY);
+    }, { passive: true });
+    addEventListener("touchstart", e => { const t = e.touches[0]; if (t) { lx = t.clientX; ly = t.clientY; } }, { passive: true });
+    addEventListener("touchmove", e => { const t = e.touches[0]; if (t) trail(t.clientX, t.clientY); }, { passive: true });
+
+    // হোভার করলে নীল সিলেকশন বক্স + মাপ (পুরো পেজ খুলে যাওয়ার পর)
+    const sel = document.getElementById("sel"), selLabel = sel.querySelector("b");
+    const SEL = ".info .name,.role,.socials a,.photo,.credit a";
+    let target = null;
+    function place() {
+      if (!target) return;
+      const r = target.getBoundingClientRect();
+      sel.style.left = r.left + "px"; sel.style.top = r.top + "px";
+      sel.style.width = r.width + "px"; sel.style.height = r.height + "px";
+      selLabel.textContent = Math.round(r.width) + " × " + Math.round(r.height);
+    }
+    document.addEventListener("mouseover", e => {
+      const t = e.target.closest && e.target.closest(SEL);
+      if (!t || !fine || !main.classList.contains("show") || reduce) { target = null; sel.classList.remove("on"); return; }
+      target = t; place(); sel.classList.add("on");
+    });
+    document.addEventListener("mouseleave", () => { target = null; sel.classList.remove("on"); });
+
+    /* ---------- সিলেক্ট-অ্যানিমেশন ----------
+       কার্সর টেনে যতদূর লেখা/ছবি আছে ততদূর সিলেক্ট করে, শেষ হওয়ামাত্র সেই অংশের আগের অ্যানিমেশন শুরু হয়।
+       প্রথমে ইন্ট্রোর নামে, তারপর মূল পেজের প্রতিটা অংশে। */
+    const wire = document.getElementById("wire");
+    const ALL = ["show", "s-photo", "s-name", "s-role", "s-soc1", "s-soc2", "s-soc3", "s-credit"];
+    const EASE = "cubic-bezier(.5,0,.2,1)";
+
+    // ট্রান্সফর্ম খোলার আগের আসল জায়গা/মাপ
+    function baseRect(el) {
+      const r = el.getBoundingClientRect();
+      const t = getComputedStyle(el).transform;
+      const m = t === "none" ? new DOMMatrix() : new DOMMatrix(t);
+      const w = r.width / (m.a || 1), h = r.height / (m.d || 1);
+      const cx = r.left + r.width / 2 - m.e, cy = r.top + r.height / 2 - m.f;
+      return { left: cx - w / 2, top: cy - h / 2, width: w, height: h };
+    }
+
+    // নামওয়ালা তিনটা কার্সর (একবারই বানাই, ইন্ট্রো আর মূল পেজে একই কার্সর চলে)
+    let cs = null, alive = false;
+    function ensureCursors() {
+      if (cs) return cs;
+      const people = [{ n: "Design", c: "#ff4d6d" }, { n: "Code", c: "#2f7bff" }, { n: "Motion", c: "#ffb800" }];
+      cs = people.map((pe, k) => {
+        const el = document.createElement("div");
+        el.className = "fc"; el.style.color = pe.c; el.style.opacity = "0";
+        el.innerHTML = ARROW;
+        const pos = { x: innerWidth * (0.3 + 0.2 * k), y: innerHeight * 0.55 + (k - 1) * 40 };
+        el.style.transform = "translate(" + pos.x + "px," + pos.y + "px)";
+        wire.appendChild(el);
+        return { el, pos, last: null, shown: false };
+      });
+      // কার্সর চলার সময় পেছনে তীর/হার্ট ঝরে
+      alive = true;
+      (function tick() {
+        if (!alive) return;
+        cs.forEach(c => {
+          const r = c.el.getBoundingClientRect();
+          if (!c.last) { c.last = [r.left, r.top]; return; }
+          if (Math.hypot(r.left - c.last[0], r.top - c.last[1]) > 26) { spawn(r.left, r.top); c.last = [r.left, r.top]; }
+        });
+        requestAnimationFrame(tick);
+      })();
+      return cs;
+    }
+    function mv(c, x, y, dur, ease) {
+      const a = c.el.animate(
+        [{ transform: "translate(" + c.pos.x + "px," + c.pos.y + "px)" }, { transform: "translate(" + x + "px," + y + "px)" }],
+        { duration: dur, easing: ease, fill: "forwards" });
+      c.pos = { x, y };
+      return a.finished;
+    }
+    // একটা অংশ সিলেক্ট করা: কোণে আসে → টেনে নেয় → বক্স মিলিয়ে যায়
+    async function selectDrag(c, r, o) {
+      // কার্সর শুরুর কোণের একটু পাশ থেকে ভেসে আসে
+      const sx = r.left, sy = o.text ? r.top + r.height : r.top;
+      c.el.getAnimations().forEach(a => a.cancel());
+      c.pos = { x: sx - 50, y: sy + 40 };
+      c.el.style.transform = "translate(" + c.pos.x + "px," + c.pos.y + "px)";
+      c.el.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 160, fill: "forwards" });
+      await mv(c, sx, sy, 160, "ease-out");
+      const h0 = o.text ? r.height : 0;
+      const box = document.createElement("div");
+      box.className = "sb";
+      box.style.cssText = "left:" + r.left + "px;top:" + r.top + "px;width:0;height:" + h0 + "px";
+      box.innerHTML = '<i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i>';
+      wire.appendChild(box);
+      const a1 = box.animate(
+        [{ width: "0px", height: h0 + "px" }, { width: r.width + "px", height: r.height + "px" }],
+        { duration: o.dur, easing: EASE, fill: "forwards" });
+      const a2 = mv(c, r.left + r.width, r.top + r.height, o.dur, EASE);
+      await Promise.all([a1.finished, a2]);
+      // টানা শেষ হওয়ামাত্র কার্সর সাথে সাথে মিলিয়ে যায়
+      c.el.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 90, fill: "forwards" });
+      box.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 450, delay: 150, fill: "forwards" })
+        .finished.then(() => box.remove());
+    }
+
+    /* ---------- শেষ দৃশ্য ----------
+       কার্সরগুলো উপরের ফাঁকা জায়গায় এক জায়গায় জড়ো হয়ে গোল হয়ে ঘোরে, তারপর কার্সর দিয়েই নামটা লেখা হয়, তারপর নাম মিলিয়ে যায়। */
+    const clamp01 = v => Math.max(0, Math.min(1, v));
+    const smooth = v => { v = clamp01(v); return v * v * (3 - 2 * v); };
+    const lerp = (a, b, t) => a + (b - a) * t;
+    const frames = (dur, fn) => new Promise(res => {
+      const t0 = performance.now();
+      (function f(now) { const p = clamp01((now - t0) / dur); fn(p); p < 1 ? requestAnimationFrame(f) : res(); })(t0);
+    });
+
+    async function finale(list) {
+      const info = document.querySelector(".info");
+      const ir = info ? info.getBoundingClientRect() : { left: 24, top: innerHeight * 0.6 };
+      const fin = document.createElement("div");
+      fin.className = "fin"; fin.textContent = "MD Shehab Uddin";
+      wire.appendChild(fin);
+      const tw = fin.offsetWidth, th = fin.offsetHeight;
+      const left = Math.max(16, (innerWidth - tw) / 2);            // পর্দার ঠিক মাঝখানে
+      const yc = innerHeight / 2;
+      fin.style.left = left + "px"; fin.style.top = (yc - th / 2) + "px";
+      const base = yc + th * 0.3;                                  // কার্সরের ডগা এই লাইন ধরে চলে
+      const cx = left + 40, cy = base;                             // জড়ো হওয়ার জায়গা (লেখার শুরুর বিন্দু)
+
+      list.forEach(c => { c.el.getAnimations().forEach(a => a.cancel()); c.el.style.opacity = "1"; });
+      const starts = [[-30, cy + 60], [innerWidth + 30, cy - 40], [cx, innerHeight + 30]];
+      const last = list.map(() => ({ x: 0, y: 0 }));
+      const put = (k, x, y) => { last[k] = { x, y }; list[k].el.style.transform = "translate(" + x + "px," + y + "px)"; };
+
+      // ক) এক জায়গায় জড়ো হয়ে গোল হয়ে ঘোরে
+      await frames(1500, p => {
+        const ang = Math.PI * 2 * 1.7 * smooth(p);
+        const R = lerp(90, 34, smooth(p));
+        const b = smooth(p / 0.3);
+        list.forEach((c, k) => {
+          const a = ang + k * Math.PI * 2 / 3;
+          const ox = cx + Math.cos(a) * R, oy = cy + Math.sin(a) * R;
+          put(k, lerp(starts[k][0], ox, b), lerp(starts[k][1], oy, b));
+        });
+      });
+
+      // খ) কার্সর দিয়ে নাম লেখা: সামনের কার্সর যতদূর যায়, তার পেছনে অক্ষর ফুটে ওঠে
+      const from = last.map(o => ({ x: o.x, y: o.y }));
+      await frames(1500, p => {
+        const e = smooth(p), b = smooth(p / 0.15);
+        list.forEach((c, k) => {
+          const pk = clamp01(e - k * 0.07);
+          const wx = left + tw * pk, wy = base + Math.sin(p * 26 + k * 1.7) * 7;
+          put(k, lerp(from[k].x, wx, b), lerp(from[k].y, wy, b));
+        });
+        fin.style.clipPath = "inset(0 " + ((1 - e) * 100).toFixed(2) + "% 0 0)";
+      });
+      fin.style.clipPath = "none";
+      list.forEach(c => c.el.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 90, fill: "forwards" }));   // লেখা শেষ → কার্সর সাথে সাথে নেই
+
+      // গ) নাম একটু থেকে মিলিয়ে যায়
+      await new Promise(res => setTimeout(res, 900));
+      await fin.animate([{ opacity: 1, filter: "blur(0)" }, { opacity: 0, filter: "blur(6px)" }],
+        { duration: 700, easing: "ease-in", fill: "forwards" }).finished;
+      fin.remove();
+    }
+
+    // ১) ওয়েবসাইটে ঢুকতেই ইন্ট্রোর নাম: আগে কার্সর টেনে সিলেক্ট, তারপর অক্ষর ওঠে
+    window.introSelect = async function () {
+      if (reduce) return;
+      const el = document.getElementById("introName");
+      const r = el && baseRect(el);
+      if (!r || r.width < 2 || r.height < 2) return;
+      await selectDrag(ensureCursors()[0], r, { label: "Heading", text: true, dur: 700 });
+    };
+
+    // ২) মূল পেজ: নাম, Designer, বাটন, ছবি, ক্রেডিট একে একে
+    window.startReveal = async function () {
+      if (reduce) { main.classList.add(...ALL); wire.remove(); return; }
+      const steps = [
+        { sel: ".info .name", cls: "s-name",   label: "Heading", text: true,  dur: 650, tight: true },
+        { sel: ".role",       cls: "s-role",   label: "Text",    text: true,  dur: 320, tight: true },   // শুধু "Designer" লেখাটুকু
+        { sel: ".socials a:nth-child(1)", cls: "s-soc1", label: "Button", text: false, dur: 360 },     // Facebook
+        { sel: ".socials a:nth-child(2)", cls: "s-soc2", label: "Button", text: false, dur: 360 },     // WhatsApp
+        { sel: ".socials a:nth-child(3)", cls: "s-soc3", label: "Button", text: false, dur: 360 },     // Gmail
+        { sel: ".photo",      cls: "s-photo",  label: "Image",   text: false, dur: 520 },
+        { sel: ".credit",     cls: "s-credit", label: "Text",    text: true,  dur: 300 }
+      ];
+      // জায়গা মাপা হয় ঠিক টানার আগে। ছবি এখনো লোড না হলে (ধীর নেট) লোড হওয়া পর্যন্ত একটু অপেক্ষা করি।
+      async function measure(s) {
+        let el = document.querySelector(s.sel);
+        if (s.sel === ".photo") {
+          const img = document.querySelector("img.photo");
+          if (img && !img.complete) {
+            await Promise.race([
+              new Promise(res => { img.addEventListener("load", res); img.addEventListener("error", res); }),
+              new Promise(res => setTimeout(res, 4000))
+            ]);
+            await new Promise(res => setTimeout(res, 200));   // ছবি canvas-এ বদলানোর সময় দিই
+          }
+          el = document.querySelector(s.sel);
+        }
+        if (!el || getComputedStyle(el).display === "none") return null;
+        if (s.tight) {   // লেখা যতটুকু জায়গা নিয়েছে ঠিক ততটুকু (পুরো লাইনের চওড়া নয়)
+          const ws = el.querySelectorAll(".w");        // নামের অক্ষর/শব্দ থাকলে প্রথম থেকে শেষ পর্যন্ত মাপি
+          let rr;
+          if (ws.length) {
+            const f = ws[0].getBoundingClientRect(), l = ws[ws.length - 1].getBoundingClientRect();
+            rr = { left: f.left, top: Math.min(f.top, l.top), width: l.right - f.left, height: Math.max(f.height, l.height) };
+          } else {
+            const rg = document.createRange(); rg.selectNodeContents(el);
+            rr = rg.getBoundingClientRect();
+          }
+          const t = getComputedStyle(el).transform;
+          const m = t === "none" ? new DOMMatrix() : new DOMMatrix(t);
+          return (rr.width < 2 || rr.height < 2) ? null : { left: rr.left - m.e, top: rr.top - m.f, width: rr.width, height: rr.height };
+        }
+        const r = baseRect(el);
+        return (r.width < 2 || r.height < 2) ? null : r;
+      }
+      const list = ensureCursors();
+      for (let i = 0; i < steps.length; i++) {
+        const s = steps[i], r = await measure(s);
+        if (!r) { main.classList.add(s.cls); continue; }
+        await selectDrag(list[(i + 1) % 3], r, s);
+        main.classList.add(s.cls);          // সিলেক্ট শেষ → সাথে সাথে এই অংশের অ্যানিমেশন শুরু
+      }
+      main.classList.add("show");
+      await new Promise(res => setTimeout(res, 450));
+      try { await finale(list); } catch (e) {}
+      alive = false; wire.classList.add("out"); setTimeout(() => wire.remove(), 900);
+    };
+  })();
+</script>
+</body>
+</html>
